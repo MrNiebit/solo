@@ -446,6 +446,57 @@
           "legnth": 20
         }
       ]
+    },
+    {
+      "name": "hole",
+      "description": "树洞，匿名墙",
+      "keys": [
+        {
+          "name": "oId",
+          "description": "主键",
+          "type": "String",
+          "length": 64
+        },
+        {
+          "name": "content",
+          "description": "内容",
+          "type": "String",
+          "length": 1048576
+        },
+        {
+          "name": "clientIp",
+          "description": "用户IP",
+          "type": "String",
+          "length": 255
+        },
+        {
+          "name": "location",
+          "description": "ip 所在地区",
+          "type": "String",
+          "length": 255
+        },
+        {
+          "name": "createTime",
+          "description": "创建时间",
+          "type": "String",
+          "length": 255
+        },
+        {
+          "name": "isShow",
+          "description": "是否展示, 1：展示，0：隐藏",
+          "type": "int"
+        },
+        {
+          "name": "likeCount",
+          "description": "点赞数量",
+          "type": "int"
+        },
+        {
+          "name": "holeRandomDouble",
+          "description": "树洞随机数，用于快速查询随机树洞",
+          "type": "double"
+        }
+      ]
     }
   ]
 }

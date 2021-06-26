@@ -276,6 +276,13 @@ public final class Common {
      */
     public static final String GRAVATAR = "gravatar";
 
+    public static final String RANDOM_TREE_HOLE = "randomMessage";
+
+    /**
+     * 每天最多添加50条
+     */
+    public static final int MAX_MES_DAY_COUNT = 50;
+
     /**
      * Private constructor.
      */

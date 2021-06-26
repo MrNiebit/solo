@@ -89,6 +89,8 @@
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <testng.version>7.1.0</testng.version>
+        <ip2region.version>1.7.2</ip2region.version>
+
 
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -194,6 +196,13 @@
             <artifactId>UserAgentUtils</artifactId>
             <version>${user-agent-utils.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+            <version>${ip2region.version}</version>
+        </dependency>
+
 
     </dependencies>
 

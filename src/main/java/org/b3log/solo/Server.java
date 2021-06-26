@@ -440,6 +440,12 @@ public final class Server extends BaseServer {
                 get("/archives/{yyyy}/{MM}", articleProcessor::showArchiveArticles).
                 get("/article", articleProcessor::showArticle);
 
+        /* 增加 树洞请求，不进行权限校验 */
+        TreeHoleProcessor treeHoleProcessor = beanManager.getReference(TreeHoleProcessor.class);
+        final Dispatcher.RouterGroup treeHoleGroup = Dispatcher.group();
+        treeHoleGroup.post("/hole/message/add", treeHoleProcessor::addMessage)
+                .get("/hole/message/random", treeHoleProcessor::getRandomMessage);
+
         final B3Receiver b3Receiver = beanManager.getReference(B3Receiver.class);
         final Dispatcher.RouterGroup b3Group = Dispatcher.group();
         b3Group.post("/apis/symphony/article", b3Receiver::receiveArticle);
