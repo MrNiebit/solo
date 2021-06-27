@@ -492,6 +492,11 @@
           "type": "int"
         },
         {
+          "name": "watchedCount",
+          "description": "被查看的数量",
+          "type": "int"
+        },
+        {
           "name": "holeRandomDouble",
           "description": "树洞随机数，用于快速查询随机树洞",
           "type": "double"

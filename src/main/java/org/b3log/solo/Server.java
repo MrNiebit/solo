@@ -444,7 +444,9 @@ public final class Server extends BaseServer {
         TreeHoleProcessor treeHoleProcessor = beanManager.getReference(TreeHoleProcessor.class);
         final Dispatcher.RouterGroup treeHoleGroup = Dispatcher.group();
         treeHoleGroup.post("/hole/message/add", treeHoleProcessor::addMessage)
-                .get("/hole/message/random", treeHoleProcessor::getRandomMessage);
+                .get("/hole/message/random", treeHoleProcessor::getRandomMessage)
+                .get("/hole/message/addLike/{oId}", treeHoleProcessor::addLike)
+                .options("/hole/message/add", treeHoleProcessor::addMessage);
 
         final B3Receiver b3Receiver = beanManager.getReference(B3Receiver.class);
         final Dispatcher.RouterGroup b3Group = Dispatcher.group();

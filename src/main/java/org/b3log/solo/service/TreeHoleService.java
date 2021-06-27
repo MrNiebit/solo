@@ -46,6 +46,8 @@ public class TreeHoleService {
             treeHole.put(TreeHole.likeCount, 0);
             // 随机数
             treeHole.put(TreeHole.hole_random_double, Math.random());
+            // 被查看的数量
+            treeHole.put(TreeHole.watchedCount, 0);
             treeHoleRepository.add(treeHole);
             transaction.commit();
             return ret;
@@ -63,5 +65,20 @@ public class TreeHoleService {
 
     public long countByIp(long todayDate, String realIp) {
         return treeHoleRepository.countByIp (todayDate, realIp);
+    }
+
+    public void updateCountById(String column, String id) {
+        // 当涉及到 增删改 的时候，需要开启事务
+        Transaction transaction = treeHoleRepository.beginTransaction();
+        try {
+            treeHoleRepository.updateCountById (column, id);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            LOGGER.error("update count ex, column: {}, id: {}, msg: {}", column,
+                    id, e.getMessage());
+        }
     }
 }

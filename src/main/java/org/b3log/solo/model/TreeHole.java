@@ -44,6 +44,11 @@ public class TreeHole {
     public static final String likeCount = "likeCount";
 
     /**
+     * 被查看的数量
+     */
+    public static final String watchedCount = "watchedCount";
+
+    /**
      * Key of random double.
      */
     public static final String hole_random_double = "holeRandomDouble";

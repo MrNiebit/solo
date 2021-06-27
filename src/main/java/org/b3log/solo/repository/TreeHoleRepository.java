@@ -99,4 +99,14 @@ public class TreeHoleRepository extends AbstractRepository {
             return Common.MAX_MES_DAY_COUNT;
         }
     }
+
+    public void updateCountById(String column, String id) throws RepositoryException {
+        JSONObject jsonObject = get(id);
+        if (jsonObject == null) {
+            throw new RepositoryException();
+        }
+        long count = jsonObject.optLong(column) + 1;
+        jsonObject.put(column, count);
+        update(id, jsonObject, column);
+    }
 }

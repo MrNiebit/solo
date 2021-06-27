@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Stopwatchs;
+import org.b3log.solo.processor.TreeHoleProcessor;
 import org.b3log.solo.util.Solos;
 
 import java.util.concurrent.Executors;
@@ -112,6 +113,16 @@ public class CronMgmtService {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);
             } finally {
                 Stopwatchs.release();
+            }
+        }, delay, 1000 * 60 * 60 * 24, TimeUnit.MILLISECONDS);
+        delay += 2000;
+
+        SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
+            try {
+                TreeHoleProcessor.WATCHED_SET.clear();
+                TreeHoleProcessor.LIKED_SET.clear();
+            } catch (Exception e) {
+                LOGGER.log(Level.ERROR, "delete set data, Executes cron failed", e);
             }
         }, delay, 1000 * 60 * 60 * 24, TimeUnit.MILLISECONDS);
         delay += 2000;
