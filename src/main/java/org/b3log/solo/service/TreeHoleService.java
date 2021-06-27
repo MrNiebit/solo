@@ -51,8 +51,8 @@ public class TreeHoleService {
             }
             // 创建时间
             treeHole.put(TreeHole.createTime, System.currentTimeMillis());
-            // 是否展示，默认展示
-            treeHole.put(TreeHole.isShow, 1);
+            // 是否展示，默认 不展示，设置为0
+            treeHole.put(TreeHole.isShow, 0);
             // 点赞数
             treeHole.put(TreeHole.likeCount, 0);
             // 随机数
