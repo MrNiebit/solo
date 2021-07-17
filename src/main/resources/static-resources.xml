@@ -23,6 +23,7 @@
 
     <include path="/robots.txt"/>
     <include path="/sw.js"/>
+    <include path="/ads.txt"/>
 
     <include path="/js/**.js"/>
     <include path="/js/**/*.js"/>
