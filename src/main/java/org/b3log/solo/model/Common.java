@@ -283,6 +283,8 @@ public final class Common {
      */
     public static final int MAX_MES_DAY_COUNT = 50;
 
+    public static final String SESSION_LIST_KEY = "randomMessageListKey";
+
     /**
      * Private constructor.
      */

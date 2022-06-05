@@ -40,4 +40,14 @@ public class DateTest {
         System.out.println(today.toInstant(ZoneOffset.ofHours(8)).toEpochMilli());
     }
 
+    @Test
+    public void testString () {
+        String ids = "123";
+        String content = "content: " + ids;
+        System.out.println(content);
+        ids = "456,";
+        System.out.println(content);
+        System.out.println(ids.substring(0, ids.indexOf(',')));
+    }
+
 }

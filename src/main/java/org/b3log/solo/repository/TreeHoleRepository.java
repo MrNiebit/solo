@@ -14,10 +14,10 @@ package org.b3log.solo.repository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.b3log.latke.Keys;
+import org.b3log.latke.http.Session;
 import org.b3log.latke.repository.*;
 import org.b3log.latke.repository.annotation.Repository;
 import org.b3log.latke.service.ServiceException;
-import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.TreeHole;
 import org.json.JSONObject;
@@ -43,18 +43,43 @@ public class TreeHoleRepository extends AbstractRepository {
         super(TreeHole.hole);
     }
 
-    public JSONObject getRandom () throws ServiceException {
+    public JSONObject getRandom (Session session) throws ServiceException {
         try {
-            List<JSONObject> randomly = this.getRandomly(10);
-            if (null != randomly && randomly.size() > 0) {
-                return randomly.get(0);
+            String ids = session.getAttribute(Common.SESSION_LIST_KEY);
+            if (null == ids) {
+                ids = "\"\"";
             }
-            return new JSONObject();
+            if (ids.endsWith(",")) {
+                ids = ids.substring(0, ids.lastIndexOf(','));
+            }
+            String sql = "SELECT * FROM b3_solo_hole WHERE createTime not in ( %s ) ORDER BY RAND() LIMIT 10";
+            List<JSONObject> select = super.select(String.format(sql, ids));
+            if (null == select || select.size() == 0) {
+//                ids = "''";
+                List<JSONObject> results = super.select(String.format(sql, ids));
+                if (null == results || results.size() == 0) {
+                    return new JSONObject();
+                }
+                JSONObject jsonObject = results.get(0);
+                session.setAttribute(Common.SESSION_LIST_KEY, ids + ",'" + jsonObject.optString(TreeHole.createTime) + "\",");
+                return results.get(0);
+            }
+            JSONObject jsonObject = select.get(0);
+            session.setAttribute(Common.SESSION_LIST_KEY, ids + ",\"" + jsonObject.optString(TreeHole.createTime) + "\",");
+            return select.get(0);
         } catch (Exception e) {
             LOGGER.error("get random message failed ..");
             throw new ServiceException(e);
         }
     }
+
+//    @Override
+//    public List<JSONObject> getRandomly(int fetchSize) throws RepositoryException {
+//        String sql = "SELECT * FROM b3_solo_hole WHERE createTime >=" +
+//                " ( (SELECT MAX(createTime) FROM b3_solo_hole) - (SELECT MIN(createTime) FROM b3_solo_hole ) )" +
+//                " * RAND() + (SELECT MIN(createTime) FROM b3_solo_hole) order by RAND() LIMIT " + fetchSize;
+//        return super.select(sql);
+//    }
 
     @Override
     public List<JSONObject> getRandomly(int fetchSize) throws RepositoryException {

@@ -15,8 +15,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.b3log.latke.Keys;
+import org.b3log.latke.http.Request;
 import org.b3log.latke.http.RequestContext;
 import org.b3log.latke.http.Response;
+import org.b3log.latke.http.Session;
 import org.b3log.latke.http.renderer.JsonRenderer;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.ioc.Singleton;
@@ -30,11 +32,9 @@ import org.b3log.solo.util.StatusCodes;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
-
 import java.time.ZoneOffset;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -140,14 +140,16 @@ public class TreeHoleProcessor {
         JsonRenderer renderer = new JsonRenderer();
         context.setRenderer(renderer);
         JSONObject jsonObject = new JSONObject();
-        JSONObject ret = getRandomly (IPUtils.getRealIp(context.getRequest()));
+        Request request = context.getRequest();
+        Session session = request.getSession();
+        JSONObject ret = getRandomly (IPUtils.getRealIp(request), session);
         jsonObject.put(Common.RANDOM_TREE_HOLE, ret);
         renderer.setJSONObject(jsonObject);
     }
 
-    public JSONObject getRandomly (String clientIp) {
+    public JSONObject getRandomly (String clientIp, Session session) {
         try {
-            JSONObject randomMessage = treeHoleService.getRandomMessage();
+            JSONObject randomMessage = treeHoleService.getRandomMessage(session);
             String id = randomMessage.optString(Keys.OBJECT_ID);
             String watchedKey = clientIp + id;
             if (!WATCHED_SET.contains(watchedKey)) {

@@ -11,12 +11,13 @@
  */
 package org.b3log.solo.service;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.b3log.latke.Keys;
+import org.b3log.latke.http.Session;
 import org.b3log.latke.ioc.Inject;
-import org.b3log.latke.repository.*;
+import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Ids;
@@ -70,8 +71,8 @@ public class TreeHoleService {
         }
     }
 
-    public JSONObject getRandomMessage() throws ServiceException {
-        return treeHoleRepository.getRandom();
+    public JSONObject getRandomMessage(Session session) throws ServiceException {
+        return treeHoleRepository.getRandom(session);
     }
 
     public long countByIp(long todayDate, String realIp) {
