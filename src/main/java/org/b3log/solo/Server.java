@@ -206,7 +206,7 @@ public final class Server extends BaseServer {
         }
         String staticPath = commandLine.getOptionValue("static_path");
         if (null != staticPath) {
-            if (StringUtils.equals(staticServerHost, "cdn.jsdelivr.net")) {
+            if (StringUtils.equals(staticServerHost, "fastly.jsdelivr.net")) {
                 // 如果使用了 jsDelivr，则需要加上版本号避免 CDN 缓存问题 https://github.com/88250/solo/issues/83
                 // /gh/88250/solo/src/main/resources => /gh/88250/solo@version/src/main/resources
                 if (!StringUtils.contains(staticPath, "@")) {
