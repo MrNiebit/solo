@@ -13,7 +13,7 @@ package org.b3log.solo.service;
 
 import jodd.http.HttpRequest;
 import jodd.http.HttpResponse;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -138,7 +138,7 @@ public class UserMgmtService {
         if (null == usiteOpt) {
             usiteOpt = new JSONObject();
             usiteOpt.put(Keys.OBJECT_ID, Option.ID_C_USITE);
-            usiteOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HACPAI);
+            usiteOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_LIANDI);
         }
         usiteOpt.put(Option.OPTION_VALUE, usite.toString());
         try {

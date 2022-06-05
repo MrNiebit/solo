@@ -3,7 +3,7 @@
 <br><br>
 小而美的博客系统，专为程序员设计
 <br><br>
-<a title="Build Status" target="_blank" href="https://travis-ci.org/88250/solo"><img src="https://img.shields.io/travis/88250/solo.svg?style=flat-square"></a>
+<a title="Build Status" target="_blank" href="https://github.com/88250/solo/actions/workflows/ci.yml"><img src="https://img.shields.io/github/workflow/status/88250/solo/Build%20Test?style=flat-square"></a>
 <a title="Docker Image CI" target="_blank" href="https://github.com/88250/solo/actions"><img src="https://img.shields.io/github/workflow/status/88250/solo/Docker%20Image%20CI?color=blue&label=Actions&logo=github&style=flat-square"></a>
 <a title="Coverage Status" target="_blank" href="https://coveralls.io/github/88250/solo"><img src="https://img.shields.io/coveralls/github/88250/solo.svg?style=flat-square&color=CC9933"></a>
 <a title="Code Size" target="_blank" href="https://github.com/88250/solo"><img src="https://img.shields.io/github/languages/code-size/88250/solo.svg?style=flat-square&color=6699FF"></a>
@@ -452,7 +452,10 @@ proxy_set_header  X-Real-IP  $remote_addr;
 --static_path=/gh/88250/solo/src/main/resources
 ```
 
-请注意，以上配置仅支持内置皮肤，如果挂载了第三方皮肤的话请按需调整。
+请注意：
+
+* 以上配置仅支持内置皮肤，如果挂载了第三方皮肤的话请按需调整
+* 中国大陆地区可能无法访问 jsDelivr CDN
 
 ### Solo 会一直维护下去么？
 

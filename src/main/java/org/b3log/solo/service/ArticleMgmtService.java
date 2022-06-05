@@ -11,9 +11,9 @@
  */
 package org.b3log.solo.service;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -309,7 +309,7 @@ public class ArticleMgmtService {
             final JSONObject data = new JSONObject().put(ARTICLE, article);
             B3ArticleSender.pushArticleToRhy(data);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Pushes an article [id=" + articleId + "] to HacPai failed", e);
+            LOGGER.log(Level.ERROR, "Pushes an article [id=" + articleId + "] to LianDi failed", e);
         }
     }
 

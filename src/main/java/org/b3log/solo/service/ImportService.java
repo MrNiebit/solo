@@ -12,9 +12,9 @@
 package org.b3log.solo.service;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +27,7 @@ import org.b3log.solo.model.Article;
 import org.b3log.solo.util.Skins;
 import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import java.io.File;
 import java.net.URI;
@@ -36,7 +37,7 @@ import java.util.*;
  * Import service.
  *
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.0.1.8, Jun 16, 2020
+ * @version 1.0.2.0, May 24, 2022
  * @since 2.2.0
  */
 @Service
@@ -166,7 +167,7 @@ public class ImportService {
         }
 
         final JSONObject ret = new JSONObject();
-        final Yaml yaml = new Yaml();
+        final Yaml yaml = new Yaml(new SafeConstructor());
         Map elems;
 
         try {
@@ -205,7 +206,7 @@ public class ImportService {
         // 另外，如果原文中存在重复时间，则需要增加随机数避免 id 重复：自动生成的文章链接重复问题优化 https://github.com/88250/solo/issues/147
         final Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.add(Calendar.MILLISECOND, RandomUtils.nextInt(256));
+        calendar.add(Calendar.MILLISECOND, RandomUtils.nextInt(0, 256));
         date = calendar.getTime();
         ret.put(Keys.OBJECT_ID, String.valueOf(date.getTime()));
 

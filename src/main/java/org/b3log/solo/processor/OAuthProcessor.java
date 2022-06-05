@@ -11,8 +11,8 @@
  */
 package org.b3log.solo.processor;
 
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,7 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * OAuth processor.
  * <ul>
- * <li>Redirects to HacPai auth page (/login/redirect), GET</li>
+ * <li>Redirects to LianDi auth page (/login/redirect), GET</li>
  * <li>OAuth callback (/login/callback), GET</li>
  * </ul>
  *
@@ -97,7 +97,7 @@ public class OAuthProcessor {
     private LangPropsService langPropsService;
 
     /**
-     * Redirects to HacPai auth page.
+     * Redirects to LianDi auth page.
      *
      * @param context the specified context
      */
